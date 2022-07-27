@@ -140,6 +140,10 @@
                         <input type="text" class="form-control" name="tahun_angkatan" id="tahun_angkatan">
                     </div>
                     <div class="form-group">
+                        <label for="no_wa_ortu">No wa ortu</label>
+                        <input type="text" class="form-control" name="no_wa_ortu" id="no_wa_ortu">
+                    </div>
+                    <div class="form-group">
                         <label for="foto">foto</label>
                         <input type="file" class="form-control" name="foto" id="foto">
                     </div>
@@ -182,6 +186,7 @@
             $('#tanggal_lahir').val(dataEdit.tanggal_lahir);
             $('#jenis_kelamin').val("L");
             $('#alamat').val(dataEdit.alamat);
+            $('#no_wa_ortu').val(dataEdit.no_wa_ortu);
             $('#tahun_angkatan').val(dataEdit.tahun_angkatan);
             $('#formku').attr('action', '/admin/update_data_siswa');
         })

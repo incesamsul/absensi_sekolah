@@ -91,6 +91,30 @@ class Admin extends Controller
         return view('pages.data_siswa.index', $data);
     }
 
+    public function dataGuru()
+    {
+        $data['headerTitle'] = 'Data Guru';
+        $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
+        $data['guru'] = User::where('role', 'guru')->get();
+        return view('pages.data_guru.index', $data);
+    }
+
+    public function dataWakasek()
+    {
+        $data['headerTitle'] = 'Data Wakasek';
+        $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
+        $data['wakasek'] = User::where('role', 'wakasek_kesiswaan')->get();
+        return view('pages.data_wakasek.index', $data);
+    }
+
+    public function dataKepsek()
+    {
+        $data['headerTitle'] = 'Data Kepsek';
+        $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
+        $data['guru'] = User::where('role', 'kepala_sekolah')->get();
+        return view('pages.data_kepsek.index', $data);
+    }
+
     public function jadwalMengajar()
     {
         $data['headerTitle'] = 'Jadwal Mengajar';
@@ -339,6 +363,7 @@ class Admin extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
+            'no_wa_ortu' => $request->no_wa_ortu,
             'tahun_angkatan' => $request->tahun_angkatan,
             'foto' => $imageName,
         ]);
@@ -369,6 +394,7 @@ class Admin extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'alamat' => $request->alamat,
                 'tahun_angkatan' => $request->tahun_angkatan,
+                'no_wa_ortu' => $request->no_wa_ortu,
                 'foto' => $imageName,
             ]);
         } else {
@@ -380,6 +406,7 @@ class Admin extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'alamat' => $request->alamat,
+                'no_wa_ortu' => $request->no_wa_ortu,
                 'tahun_angkatan' => $request->tahun_angkatan,
             ]);
         }

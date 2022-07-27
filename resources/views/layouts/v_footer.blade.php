@@ -20,7 +20,7 @@
             </ul>
         </nav> --}}
         <div class="copyright ml-auto">
-            © 2022 Absensi MTs Negeri Pati (Abid Taufiqur Rohman | 2021)
+            © 2022 SMA KRISTEN ELIM MAKASSAR
         </div>
     </div>
 </footer>

@@ -24,6 +24,7 @@ class CreateSiswaTable extends Migration
             $table->string('alamat');
             $table->string('foto');
             $table->string('tahun_angkatan');
+            $table->string('no_wa_ortu');
             $table->timestamps();
             $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onUpdate('cascade')->onDelete('cascade');
         });

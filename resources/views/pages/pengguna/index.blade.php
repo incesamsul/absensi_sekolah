@@ -75,6 +75,9 @@
                             <option>Administrator</option>
                             <option value="guru">Guru</option>
                             <option value="guru_bk">Guru BK</option>
+                            <option value="wakasek_kesiswaan">Wakasek Kesiswaan</option>
+                            <option value="kepala_sekolah">Kepala Sekolah</option>
+
                         </select>
                     </div>
             </div>

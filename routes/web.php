@@ -11,6 +11,7 @@ use App\Http\Controllers\Penilai;
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaliKelas;
+use App\Http\Controllers\GuruBk;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/postlogin', [LoginController::class, 'postLogin']);
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/', [LoginController::class, 'login']);
+Route::get('/send-notif', [Home::class, 'send']);
+
+
 
 
 Route::get('/tentang_aplikasi', [Home::class, 'tentangAplikasi']);
@@ -39,7 +43,7 @@ Route::group(['middleware' => ['guest']], function () {
 });
 
 // GENERAL CONTROLLER ROUTE
-Route::group(['middleware' => ['auth', 'ceklevel:Administrator,guru,guru_bk,wali_kelas']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:Administrator,guru,guru_bk,wali_kelas,wakasek_kesiswaan,kepala_sekolah']], function () {
 
     Route::get('/dashboard', [General::class, 'dashboard']);
     Route::get('/profile', [General::class, 'profile']);
@@ -70,6 +74,13 @@ Route::group(['middleware' => ['auth', 'ceklevel:wali_kelas']], function () {
     });
 });
 
+//GURU BK
+Route::group(['middleware' => ['auth', 'ceklevel:guru_bk']], function () {
+    Route::group(['prefix' => 'guru_bk'], function () {
+        // GET REQUEST
+        Route::get('/kelas/{id_kelas}', [GuruBk::class, 'rekapAbsen']);
+    });
+});
 
 // ADMIN ROUTE
 Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
@@ -86,6 +97,10 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         Route::get('/wali_kelas', [Admin::class, 'waliKelas']);
         Route::get('/jadwal_mengajar', [Admin::class, 'jadwalMengajar']);
         Route::get('/data_siswa', [Admin::class, 'dataSiswa']);
+        Route::get('/data_guru', [Admin::class, 'dataGuru']);
+        Route::get('/data_wakasek', [Admin::class, 'dataWakasek']);
+        Route::get('/data_kepsek', [Admin::class, 'dataKepsek']);
+        
 
         // CRUD KELAS
         Route::post('/create_kelas', [Admin::class, 'createKelas']);
