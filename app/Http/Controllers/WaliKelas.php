@@ -16,7 +16,7 @@ use Illuminate\Http\Request;
 
 class WaliKelas extends Controller
 {
-    public function rekapAbsen($idMataPelajaran)
+    public function rekapAbsen($idMataPelajaran = 0)
     {
         $data['headerTitle'] = 'Rekap absen';
         $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
