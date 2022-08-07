@@ -339,6 +339,7 @@ class Admin extends Controller
             'tanggal_lahir' => $request->tanggal_lahir,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
+            'no_wa_ortu' => $request->no_wa_ortu,
             'tahun_angkatan' => $request->tahun_angkatan,
             'foto' => $imageName,
         ]);
@@ -369,6 +370,7 @@ class Admin extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'alamat' => $request->alamat,
                 'tahun_angkatan' => $request->tahun_angkatan,
+                'no_wa_ortu' => $request->no_wa_ortu,
                 'foto' => $imageName,
             ]);
         } else {
@@ -380,6 +382,7 @@ class Admin extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'alamat' => $request->alamat,
+                'no_wa_ortu' => $request->no_wa_ortu,
                 'tahun_angkatan' => $request->tahun_angkatan,
             ]);
         }

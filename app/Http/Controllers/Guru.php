@@ -37,7 +37,6 @@ class Guru extends Controller
 
     public function createAbsenPerKelas(Request $request)
     {
-
         foreach ($request->status_kehadiran as $status_kehadiran) {
             $statusKehadiran = explode(",", $status_kehadiran);
             $idSiswa = $statusKehadiran[0];
@@ -49,6 +48,14 @@ class Guru extends Controller
                 'id_kelas' => $request->id_kelas,
                 'pertemuan_ke' => $request->pertemuan_ke
             ]);
+            $jadwal = JadwalMengajar::where('id_kelas', $request->id_kelas)->first();
+            $siswa = Siswa::where('id_siswa', $idSiswa)->first();
+            $pesan = "Notifikasi presensi smk kristen elim \n \n";
+            $pesan .= "Nama siswa :" . $siswa->nama_siswa . "\n";
+            $pesan .= "Status Kehadiran : " . getKetPresensi($kehadiran) . "\n";
+            $pesan .= "Pertemuan ke : " . $request->pertemuan_ke . "\n";
+            $pesan .= "Mata pelajaran : " . $jadwal->mataPelajaran->nama_mata_pelajaran;
+            sendNotification($pesan, $siswa->no_wa_ortu);
         }
         return 1;
     }
@@ -68,6 +75,15 @@ class Guru extends Controller
                 'pertemuan_ke' => $request->pertemuan_ke,
                 'id_kelas' => $request->id_kelas
             ]);
+
+            $jadwal = JadwalMengajar::where('id_kelas', $request->id_kelas)->first();
+            $siswa = Siswa::where('id_siswa', $idSiswa)->first();
+            $pesan = "Notifikasi presensi smk kristen elim \n \n";
+            $pesan .= "Nama siswa :" . $siswa->nama_siswa . "\n";
+            $pesan .= "Status Kehadiran : " . getKetPresensi($kehadiran) . "\n";
+            $pesan .= "Pertemuan ke : " . $request->pertemuan_ke . "\n";
+            $pesan .= "Mata pelajaran : " . $jadwal->mataPelajaran->nama_mata_pelajaran;
+            sendNotification($pesan, $siswa->no_wa_ortu);
         }
         return 1;
     }

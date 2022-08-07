@@ -7,8 +7,44 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use phpDocumentor\Reflection\Types\Null_;
 use PhpParser\Node\Expr\FuncCall;
+use Twilio\Rest\Client;
 
 use function PHPUnit\Framework\isNull;
+
+
+function getKetPresensi($kodeKehadiran)
+{
+    if ($kodeKehadiran == 0) {
+        return "alpa";
+    } else if ($kodeKehadiran == 1) {
+        return "hadir";
+    } else {
+        return "izin";
+    }
+}
+
+function sendNotification($message, $noWa)
+{
+
+
+    // Update the path below to your autoload.php,
+    // see https://getcomposer.org/doc/01-basic-usage.md
+
+    $sid    = "AC80c49cc0f6ee0b7b01a332c886df472a";
+    $token  = "82ca2c5faf79749ef7ddc73a5da29cfd";
+    $twilio = new Client($sid, $token);
+
+    $message = $twilio->messages
+        ->create(
+            "whatsapp:+" . $noWa, // to
+            array(
+                "from" => "whatsapp:+14155238886",
+                "body" => $message
+            )
+        );
+
+    // print($message->sid);
+}
 
 function generateRandomString($length = 25)
 {
