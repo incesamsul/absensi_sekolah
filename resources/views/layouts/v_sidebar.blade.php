@@ -125,7 +125,7 @@
 								<p>Data guru</p>
 							</a>
 						</li>
-                        
+
 						<li class="nav-item" id="liDataWakasek">
 							<a href="{{ URL::to('/admin/data_wakasek') }}" class="collapsed" >
 							<i class="fas fa-chalkboard-teacher"></i>
@@ -139,7 +139,7 @@
 								<p>Data Kepala Sekolah</p>
 							</a>
 						</li>
-                        
+
                         @endif
                         {{-- MENU GURU --}}
                         @if (auth()->user()->role == 'guru')
@@ -183,7 +183,10 @@
 											<span class="sub-item">Kelas {{ $kelas->nama_kelas }}</span>
 										</a>
 									</li>
-									@endforeach
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
                         @endif
 
 						{{-- MENU KEPALA SEKOLAH--}}
@@ -202,12 +205,15 @@
 											<span class="sub-item">Kelas {{ $kelas->nama_kelas }}</span>
 										</a>
 									</li>
-									@endforeach
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
 	 					@endif
-						
+
 						{{-- MENU GURU BK--}}
                         @if (auth()->user()->role == 'guru_bk')
-                        
+
 						<li class="nav-item" id="liPresentasiKehadiran">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-layer-group"></i>
@@ -222,10 +228,10 @@
 											<span class="sub-item">Kelas {{ $kelas->nama_kelas }}</span>
 										</a>
 									</li>
-									@endforeach
-								</ul>
-							</div>
-						</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </li>
                         @endif
 
 						<li class="mx-4 mt-2">
