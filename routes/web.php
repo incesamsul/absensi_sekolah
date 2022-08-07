@@ -72,7 +72,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
 Route::group(['middleware' => ['auth', 'ceklevel:wali_kelas']], function () {
     Route::group(['prefix' => 'wali_kelas'], function () {
         // GET REQUEST
-        // Route::get('/rekap_absen', [WaliKelas::class, 'rekapAbsen']);
+        Route::get('/rekap_absen', [WaliKelas::class, 'rekapAbsen']);
         Route::get('/rekap_absen/{id_mata_pelajaran}', [WaliKelas::class, 'rekapAbsen']);
         Route::get('/cetak_absen', [WaliKelas::class, 'cetakAbsen']);
     });
