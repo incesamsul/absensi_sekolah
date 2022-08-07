@@ -26,7 +26,7 @@ class Guru extends Controller
         $data['tahun_ajaran'] = TahunAjaran::where('status', '1')->first();
         return view('pages.jadwal_mengajar.index', $data);
     }
-    
+
     public function presensi()
     {
         $data['headerTitle'] = 'Presensi';
@@ -43,6 +43,7 @@ class Guru extends Controller
             $kehadiran = $statusKehadiran[1];
             Absensi::create([
                 'id_siswa' => $idSiswa,
+                'id_mata_pelajaran' => $request->id_mata_pelajaran,
                 'status_kehadiran' => $kehadiran,
                 'tgl_absen' => date('Y-m-d'),
                 'id_kelas' => $request->id_kelas,
@@ -67,9 +68,10 @@ class Guru extends Controller
             $statusKehadiran = explode(",", $status_kehadiran);
             $idSiswa = $statusKehadiran[0];
             $kehadiran = $statusKehadiran[1];
-            Absensi::where('id_siswa', $idSiswa)->where('id_kelas', $request->id_kelas)->where('pertemuan_ke', $request->pertemuan_ke)->delete();
+            Absensi::where('id_siswa', $idSiswa)->where('id_mata_pelajaran', $request->id_mata_pelajaran)->where('id_kelas', $request->id_kelas)->where('pertemuan_ke', $request->pertemuan_ke)->delete();
             Absensi::create([
                 'id_siswa' => $idSiswa,
+                'id_mata_pelajaran' => $request->id_mata_pelajaran,
                 'status_kehadiran' => $kehadiran,
                 'tgl_absen' => date('Y-m-d'),
                 'pertemuan_ke' => $request->pertemuan_ke,
@@ -94,6 +96,6 @@ class Guru extends Controller
     }
     public function getAbsenPerKelas(Request $request)
     {
-        return Absensi::where('id_kelas', $request->id_kelas)->where('pertemuan_ke', $request->pertemuan_ke)->get();
+        return Absensi::where('id_kelas', $request->id_kelas)->where('id_mata_pelajaran', $request->id_mata_pelajaran)->where('pertemuan_ke', $request->pertemuan_ke)->get();
     }
 }

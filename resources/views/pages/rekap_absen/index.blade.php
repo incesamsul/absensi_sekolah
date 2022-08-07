@@ -8,7 +8,13 @@
                 <div class="card-header d-flex  justify-content-between">
                     <h4>Data Rekap Absen</h4>
                         <div class="table-tools d-flex justify-content-around ">
-                            {{-- <input type="text" class="form-control card-form-header mr-3" placeholder="Cari Data Pengguna ..." id="searchbox"> --}}
+                            <select id="jadwal_mengajar" class="form-control mx-2">
+                                <option value="">--pilih Mata pelajaran --</option>
+                                @foreach ($jadwal_mengajar as $row)
+                                <option value="{{ $row->id_mata_pelajaran }}">{{ $row->mataPelajaran->id_mata_pelajaran }} - {{ $row->mataPelajaran->kode_mata_pelajaran
+                                    }} - {{ $row->mataPelajaran->nama_mata_pelajaran }} - {{ $row->kelas->nama_kelas }}</option>
+                                @endforeach
+                            </select>
                             <a href="{{ URL::to('/wali_kelas/cetak_absen') }}" type="button" class="btn btn-primary float-right" ><i class="fas fa-print"></i></a>
                         </div>
                 </div>
@@ -32,6 +38,10 @@
 <script>
     $(document).ready(function() {
 
+        $('#jadwal_mengajar').on('change',function(){
+            let id_jadwal = $(this).val();
+            document.location.href = '/wali_kelas/rekap_absen/' + id_jadwal;
+        });
 
 
 

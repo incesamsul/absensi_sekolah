@@ -161,6 +161,7 @@
                                 tableHTML += '</select>';
                                 tableHTML += '<input type="hidden" value="' + detailKelas.id_kelas + '" name="id_kelas">';
                                 tableHTML += '<input type="hidden" value="' + pertemuan + '" name="pertemuan_ke">';
+                                tableHTML += '<input type="hidden" value="' + detailMataPelajaran.id_mata_pelajaran + '" name="id_mata_pelajaran">';
                                 tableHTML += '</td>';
                                 tableHTML += '</tr>';
                             }
@@ -183,7 +184,8 @@
                                     , dataType: 'json'
                                     , data: {
                                         id_kelas: detailKelas.id_kelas,
-                                        pertemuan_ke: pertemuan
+                                        pertemuan_ke: pertemuan,
+                                        id_mata_pelajaran: detailMataPelajaran.id_mata_pelajaran
                                     }
                                     , beforeSend: function() {
                                         $("#loading").show();

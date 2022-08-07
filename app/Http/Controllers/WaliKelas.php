@@ -16,14 +16,16 @@ use Illuminate\Http\Request;
 
 class WaliKelas extends Controller
 {
-    public function rekapAbsen()
+    public function rekapAbsen($idMataPelajaran)
     {
         $data['headerTitle'] = 'Rekap absen';
         $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
+        $data['jadwal_mengajar'] = JadwalMengajar::all();
         $idKelas = ModelsWaliKelas::where('id_guru', auth()->user()->id)->first();
         // $data['anak_wali'] = Siswa::where('id_kelas', $idKelas->id_kelas)->get();
-        $data['anak_wali'] = Siswa::with(["absensi" => function ($q) {
+        $data['anak_wali'] = Siswa::with(["absensi" => function ($q) use ($idMataPelajaran) {
             $q->where('absensi.status_kehadiran', '=', '1');
+            $q->where('absensi.id_mata_pelajaran', '=', $idMataPelajaran);
         }])->get();
         return view('pages.rekap_absen.index', $data);
     }
