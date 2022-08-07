@@ -118,7 +118,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         Route::get('/data_guru', [Admin::class, 'dataGuru']);
         Route::get('/data_wakasek', [Admin::class, 'dataWakasek']);
         Route::get('/data_kepsek', [Admin::class, 'dataKepsek']);
-        
+
 
         // CRUD KELAS
         Route::post('/create_kelas', [Admin::class, 'createKelas']);
