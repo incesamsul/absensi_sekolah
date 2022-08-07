@@ -12,6 +12,8 @@ use App\Http\Controllers\Penilai;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WaliKelas;
 use App\Http\Controllers\GuruBk;
+use App\Http\Controllers\WakasekKesiswaan;
+use App\Http\Controllers\KepalaSekolah;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -80,6 +82,22 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru_bk']], function () {
     Route::group(['prefix' => 'guru_bk'], function () {
         // GET REQUEST
         Route::get('/kelas/{id_kelas}', [GuruBk::class, 'rekapAbsen']);
+    });
+});
+
+//WAKASEK KESISWAAN
+Route::group(['middleware' => ['auth', 'ceklevel:wakasek_kesiswaan']], function () {
+    Route::group(['prefix' => 'wakasek_kesiswaan'], function () {
+        // GET REQUEST
+        Route::get('/kelas/{id_kelas}', [WakasekKesiswaan::class, 'rekapAbsen']);
+    });
+});
+
+//KEPALA SEKOLAH
+Route::group(['middleware' => ['auth', 'ceklevel:guru_bk']], function () {
+    Route::group(['prefix' => 'kepala_sekolah'], function () {
+        // GET REQUEST
+        Route::get('/kelas/{id_kelas}', [KepalaSekolah::class, 'rekapAbsen']);
     });
 });
 
