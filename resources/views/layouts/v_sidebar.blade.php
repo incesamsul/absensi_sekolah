@@ -63,6 +63,7 @@
 							</span>
 							<h4 class="text-section">MENU {{ auth()->user()->role }}</h4>
 						</li>
+						<!-- MENU ADMIN -->
                         @if (auth()->user()->role == 'Administrator')
                         <li class="nav-item" id="liPengguna">
 							<a href="{{ URL::to('/admin/pengguna') }}" class="collapsed" >
@@ -118,6 +119,27 @@
 								<p>Data siswa</p>
 							</a>
 						</li>
+						<li class="nav-item" id="liDataGuru">
+							<a href="{{ URL::to('/admin/data_guru') }}" class="collapsed" >
+							<i class="fas fa-chalkboard-teacher"></i>
+								<p>Data guru</p>
+							</a>
+						</li>
+                        
+						<li class="nav-item" id="liDataWakasek">
+							<a href="{{ URL::to('/admin/data_wakasek') }}" class="collapsed" >
+							<i class="fas fa-chalkboard-teacher"></i>
+								<p>Data Wakasek Kesiswaan</p>
+							</a>
+						</li>
+
+						<li class="nav-item" id="liDataKepsek">
+							<a href="{{ URL::to('/admin/data_kepsek') }}" class="collapsed" >
+							<i class="fas fa-chalkboard-teacher"></i>
+								<p>Data Kepala Sekolah</p>
+							</a>
+						</li>
+                        
                         @endif
                         {{-- MENU GURU --}}
                         @if (auth()->user()->role == 'guru')
@@ -141,6 +163,39 @@
 								<i class="fas fa-list"></i>
 								<p>Rekap absen</p>
 							</a>
+						</li>
+                        @endif
+
+						{{-- MENU WAKASEK KESISWAAN--}}
+                        @if (auth()->user()->role == 'wakasek_kesiswaan')
+                        <li class="nav-item" id="liRekapAbsen">
+							<a href="{{ URL::to('/wali_kelas/rekap_absen') }}" class="collapsed" >
+								<i class="fas fa-list"></i>
+								<p>Rekap absen</p>
+							</a>
+						</li>
+                        @endif
+	
+						{{-- MENU GURU BK--}}
+                        @if (auth()->user()->role == 'guru_bk')
+                        
+						<li class="nav-item" id="liPresentasiKehadiran">
+							<a data-toggle="collapse" href="#base">
+								<i class="fas fa-layer-group"></i>
+								<p>Presentase Kehadiran</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="base">
+								<ul class="nav nav-collapse">
+									@foreach(App\Models\Kelas::all() as $kelas)
+									<li id="{{ 'liKelas' . $kelas->id_kelas}}">
+										<a href="{{ URL::to('/guru_bk/kelas/'. $kelas->id_kelas) }}">
+											<span class="sub-item">Kelas {{ $kelas->nama_kelas }}</span>
+										</a>
+									</li>
+									@endforeach
+								</ul>
+							</div>
 						</li>
                         @endif
 

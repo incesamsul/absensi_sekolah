@@ -18,7 +18,7 @@ class Guru extends Controller
     {
         $data['headerTitle'] = 'Jadwal Mengajar';
         $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
-        $data['jadwal_mengajar'] = JadwalMengajar::all();
+        $data['jadwal_mengajar'] = JadwalMengajar::where('id_guru', auth()->user()->id)->get();
         $data['kelas'] = Kelas::all();
         $data['guru'] = User::where('role', 'guru')->get();
         $data['mata_pelajaran'] = MataPelajaran::all();
@@ -26,12 +26,12 @@ class Guru extends Controller
         $data['tahun_ajaran'] = TahunAjaran::where('status', '1')->first();
         return view('pages.jadwal_mengajar.index', $data);
     }
-
+    
     public function presensi()
     {
         $data['headerTitle'] = 'Presensi';
         $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
-        $data['jadwal_mengajar'] = JadwalMengajar::all();
+        $data['jadwal_mengajar'] = JadwalMengajar::where('id_guru', auth()->user()->id)->get();
         return view('pages.presensi.index', $data);
     }
 
