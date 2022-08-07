@@ -31,11 +31,8 @@ Route::post('/postlogin', [LoginController::class, 'postLogin']);
 Route::get('/logout', [LoginController::class, 'logout']);
 Route::get('/', [LoginController::class, 'login']);
 Route::get('/send-notif', [Home::class, 'send']);
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 13d1b7e8a278565e76aeace2b37b636a824bf60f
 
 
 Route::get('/tentang_aplikasi', [Home::class, 'tentangAplikasi']);
@@ -103,7 +100,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         Route::get('/data_guru', [Admin::class, 'dataGuru']);
         Route::get('/data_wakasek', [Admin::class, 'dataWakasek']);
         Route::get('/data_kepsek', [Admin::class, 'dataKepsek']);
-        
+
 
         // CRUD KELAS
         Route::post('/create_kelas', [Admin::class, 'createKelas']);
