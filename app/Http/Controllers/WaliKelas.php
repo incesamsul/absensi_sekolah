@@ -30,9 +30,13 @@ class WaliKelas extends Controller
         return view('pages.rekap_absen.index', $data);
     }
 
-    public function cetakAbsen()
+    public function cetakAbsen($idMataPelajaran = 0)
     {
-        $html = view('pages.cetak.absen');
+        $data['anak_wali'] = Siswa::with(["absensi" => function ($q) use ($idMataPelajaran) {
+            $q->where('absensi.id_mata_pelajaran', '=', $idMataPelajaran);
+        }])->get();
+
+        $html = view('pages.cetak.absen',$data);
 
         // instantiate and use the dompdf class
         $dompdf = new Dompdf();
@@ -40,7 +44,7 @@ class WaliKelas extends Controller
         $dompdf->loadHtml($html);
 
         // (Optional) Setup the paper size and orientation
-        $dompdf->setPaper('Legal', 'potrait');
+        $dompdf->setPaper('Legal', 'landscape');
 
         // Render the HTML as PDF
         $dompdf->render();

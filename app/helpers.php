@@ -1,8 +1,7 @@
 <?php
 
-use App\Models\FavoritModel;
-use App\Models\KategoriModel;
-use App\Models\LogAktivitasModel;
+use App\Models\Absensi;
+use App\Models\Siswa;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use phpDocumentor\Reflection\Types\Null_;
@@ -12,12 +11,31 @@ use Twilio\Rest\Client;
 use function PHPUnit\Framework\isNull;
 
 
+
+function getJumlahIzin($idSiswa, $idMataPelajaran){
+    return Absensi::where('id_siswa',$idSiswa)->where('id_mata_pelajaran',$idMataPelajaran)->where('status_kehadiran','2')->count();
+}
+
+function getJumlahAlpa($idSiswa, $idMataPelajaran){
+    return Absensi::where('id_siswa',$idSiswa)->where('id_mata_pelajaran',$idMataPelajaran)->where('status_kehadiran','0')->count();
+}
+
+function getJumlahHadir($idSiswa, $idMataPelajaran){
+    return Absensi::where('id_siswa',$idSiswa)->where('id_mata_pelajaran',$idMataPelajaran)->where('status_kehadiran','1')->count();
+}
+
+function getStatusKehadiranPerSiswa($idSiswa, $idMataPelajaran, $pertemuanKe){
+    return Absensi::where('id_siswa',$idSiswa)->where('id_mata_pelajaran',$idMataPelajaran)->where('pertemuan_ke',$pertemuanKe)->select('status_kehadiran')->first();
+}
+
 function getKetPresensi($kodeKehadiran)
 {
     if ($kodeKehadiran == 0) {
         return "alpa";
     } else if ($kodeKehadiran == 1) {
         return "hadir";
+    } else if ($kodeKehadiran == 99){
+        return "none";
     } else {
         return "izin";
     }
