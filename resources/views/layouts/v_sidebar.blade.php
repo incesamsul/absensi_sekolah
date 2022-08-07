@@ -156,6 +156,7 @@
 							</a>
 						</li>
                         @endif
+
                         {{-- MENU WALI KELAS--}}
                         @if (auth()->user()->role == 'wali_kelas')
                         <li class="nav-item" id="liRekapAbsen">
@@ -168,14 +169,42 @@
 
 						{{-- MENU WAKASEK KESISWAAN--}}
                         @if (auth()->user()->role == 'wakasek_kesiswaan')
-                        <li class="nav-item" id="liRekapAbsen">
-							<a href="{{ URL::to('/wali_kelas/rekap_absen') }}" class="collapsed" >
-								<i class="fas fa-list"></i>
-								<p>Rekap absen</p>
+						<li class="nav-item" id="liPresentasiKehadiran">
+							<a data-toggle="collapse" href="#base">
+								<i class="fas fa-layer-group"></i>
+								<p>Presentase Kehadiran</p>
+								<span class="caret"></span>
 							</a>
-						</li>
+							<div class="collapse" id="base">
+								<ul class="nav nav-collapse">
+									@foreach(App\Models\Kelas::all() as $kelas)
+									<li id="{{ 'liKelas' . $kelas->id_kelas}}">
+										<a href="{{ URL::to('/wakasek_kesiswaan/kelas/'. $kelas->id_kelas) }}">
+											<span class="sub-item">Kelas {{ $kelas->nama_kelas }}</span>
+										</a>
+									</li>
+									@endforeach
                         @endif
-	
+
+						{{-- MENU KEPALA SEKOLAH--}}
+                        @if (auth()->user()->role == 'kepala_sekolah')
+						<li class="nav-item" id="liPresentasiKehadiran">
+							<a data-toggle="collapse" href="#base">
+								<i class="fas fa-layer-group"></i>
+								<p>Presentase Kehadiran</p>
+								<span class="caret"></span>
+							</a>
+							<div class="collapse" id="base">
+								<ul class="nav nav-collapse">
+									@foreach(App\Models\Kelas::all() as $kelas)
+									<li id="{{ 'liKelas' . $kelas->id_kelas}}">
+										<a href="{{ URL::to('/kepala_sekolah/kelas/'. $kelas->id_kelas) }}">
+											<span class="sub-item">Kelas {{ $kelas->nama_kelas }}</span>
+										</a>
+									</li>
+									@endforeach
+	 					@endif
+						
 						{{-- MENU GURU BK--}}
                         @if (auth()->user()->role == 'guru_bk')
                         
