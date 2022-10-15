@@ -10,6 +10,7 @@ use App\Models\Siswa;
 use App\Models\TahunAjaran;
 use App\Models\User;
 use App\Models\WaliKelas;
+use App\Models\RoleUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -55,6 +56,15 @@ class Admin extends Controller
         return view('pages.semester.index', $data);
     }
 
+    public function manajemenRole()
+    {
+        $data['headerTitle'] = 'Manajemen Role';
+        $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
+        $data['role_user'] = RoleUser::all();
+        $data['user'] = User::all();
+        return view('pages.manajemen_role.index', $data);
+    }
+
     public function tahunAjaran()
     {
         $data['headerTitle'] = 'Tahun Ajaran';
@@ -87,7 +97,7 @@ class Admin extends Controller
         $data['headerTitle'] = 'Data Siswa';
         $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
         $data['kelas'] = Kelas::all();
-        $data['siswa'] = Siswa::all();
+        $data['siswa'] = Siswa::where('id_semester',getSemesterAktif()->id_semester)->get();
         return view('pages.data_siswa.index', $data);
     }
 
@@ -185,6 +195,26 @@ class Admin extends Controller
         }
     }
 
+    public function createUserRole(Request $request) {
+        RoleUser::create([
+            'id_user' => $request->user, 
+            'role' => $request->role, 
+        ]);
+        return redirect()->back()->with('message', 'role Berhasil di tambahkan');
+    }
+
+    public function updateUserRole(Request $request) {
+        RoleUser::where('id_role_user',$request->id)->update([
+            'id_user' => $request->user, 
+            'role' => $request->role,
+        ]);
+        return redirect()->back()->with('message', 'role Berhasil di update');
+    }
+
+    public function deleteUserRole(Request $request) {
+        RoleUser::where('id_role_user',$request->id)->delete();
+        return 1;
+    }
 
     // CRUD KELAS
     public function createKelas(Request $request)
@@ -364,7 +394,7 @@ class Admin extends Controller
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat' => $request->alamat,
             'no_wa_ortu' => $request->no_wa_ortu,
-            'tahun_angkatan' => $request->tahun_angkatan,
+            'id_semester' => getSemesterAktif()->id_semester,
             'foto' => $imageName,
         ]);
 
@@ -393,7 +423,7 @@ class Admin extends Controller
                 'tanggal_lahir' => $request->tanggal_lahir,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'alamat' => $request->alamat,
-                'tahun_angkatan' => $request->tahun_angkatan,
+                'id_semester' => getSemesterAktif()->id_semester,
                 'no_wa_ortu' => $request->no_wa_ortu,
                 'foto' => $imageName,
             ]);
@@ -407,7 +437,7 @@ class Admin extends Controller
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'alamat' => $request->alamat,
                 'no_wa_ortu' => $request->no_wa_ortu,
-                'tahun_angkatan' => $request->tahun_angkatan,
+                'id_semester' => getSemesterAktif()->id_semester,
             ]);
         }
 

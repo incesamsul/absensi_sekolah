@@ -20,13 +20,14 @@ class WaliKelas extends Controller
     {
         $data['headerTitle'] = 'Rekap absen';
         $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
-        $data['jadwal_mengajar'] = JadwalMengajar::all();
         $idKelas = ModelsWaliKelas::where('id_guru', auth()->user()->id)->first();
+        $data['jadwal_mengajar'] = JadwalMengajar::where('id_kelas',$idKelas->id_kelas)->get();
         // $data['anak_wali'] = Siswa::where('id_kelas', $idKelas->id_kelas)->get();
         $data['anak_wali'] = Siswa::with(["absensi" => function ($q) use ($idMataPelajaran) {
             $q->where('absensi.status_kehadiran', '=', '1');
             $q->where('absensi.id_mata_pelajaran', '=', $idMataPelajaran);
         }])->get();
+        $data['id_mata_pelajaran'] = $idMataPelajaran;
         return view('pages.rekap_absen.index', $data);
     }
 
@@ -50,7 +51,7 @@ class WaliKelas extends Controller
         $dompdf->render();
 
         // Output the generated PDF to Browser
-        $dompdf->stream("neraca_saldo.pdf", array("Attachment" => false));
+        $dompdf->stream("absensi.pdf", array("Attachment" => false));
         exit(0);
     }
 }

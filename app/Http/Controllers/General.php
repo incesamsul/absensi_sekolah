@@ -40,10 +40,10 @@ class General extends Controller
         return view('pages.bantuan.index');
     }
 
-    public function ubahRole(Request $request)
+    public function ubahRole($role)
     {
         User::where('id', auth()->user()->id)
-            ->update(['role' => $request->post('role')]);
+            ->update(['role' => $role]);
         return redirect()->back();
     }
 

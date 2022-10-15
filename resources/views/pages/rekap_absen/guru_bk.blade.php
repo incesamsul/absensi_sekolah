@@ -11,6 +11,7 @@
                             <input type="text" class="form-control card-form-header mr-3" placeholder="Cari Data Pengguna ..." id="searchbox">
                             <button type="button" class="btn btn-primary float-right" data-toggle="modal" id="btn-tambah" data-target="#modalPengguna"><i class="fas fa-plus"></i></button>
                         </div> --}}
+                        <a data-id_kelas="{{$id_kelas}}" href="" type="button" class="btn btn-primary btn-cetak float-right" ><i class="fas fa-print"></i></a>
                 </div>
                 <div class="card-body">
                     @if(count($siswa) == 0)
@@ -35,7 +36,11 @@
 <script>
     $(document).ready(function() {
 
-
+        $('.btn-cetak').on('click', function(e){
+            e.preventDefault();
+            let id_kelas = $(this).data('id_kelas');
+            document.location.href = '/guru_bk/cetak_absen/' + id_kelas;
+        })
 
 
 

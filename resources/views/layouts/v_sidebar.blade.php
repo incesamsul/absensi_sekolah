@@ -19,21 +19,18 @@
 
 							<div class="collapse in" id="collapseExample">
 								<ul class="nav">
+									<?php 
+										$roleUser = new App\Models\RoleUser;
+										$resultRole = $roleUser::where('id_user',auth()->user()->id)->get();
+									?>
+									
+									@foreach($resultRole as $row)
 									<li>
-										<a href="#profile">
-											<span class="link-collapse">My Profile</span>
+										<a href="{{ URL::to('/update_role/' . $row->role) }}">
+											<span class="link-collapse">{{ $row->role }}</span>
 										</a>
 									</li>
-									<li>
-										<a href="#edit">
-											<span class="link-collapse">Edit Profile</span>
-										</a>
-									</li>
-									<li>
-										<a href="#settings">
-											<span class="link-collapse">Settings</span>
-										</a>
-									</li>
+									@endforeach
 								</ul>
 							</div>
 						</div>
@@ -137,6 +134,12 @@
 							<a href="{{ URL::to('/admin/data_kepsek') }}" class="collapsed" >
 							<i class="fas fa-chalkboard-teacher"></i>
 								<p>Data Kepala Sekolah</p>
+							</a>
+						</li>
+						<li class="nav-item" id="liManajemenRole">
+							<a href="{{ URL::to('/admin/manajemen_role') }}" class="collapsed" >
+							<i class="fas fa-users"></i>
+								<p>Manajemen Role</p>
 							</a>
 						</li>
 

@@ -2,6 +2,7 @@
 
 use App\Models\Absensi;
 use App\Models\Siswa;
+use App\Models\Semester;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use phpDocumentor\Reflection\Types\Null_;
@@ -11,6 +12,9 @@ use Twilio\Rest\Client;
 use function PHPUnit\Framework\isNull;
 
 
+function getSemesterAktif(){
+    return Semester::where('status','1')->first();
+}
 
 function getJumlahIzin($idSiswa, $idMataPelajaran){
     return Absensi::where('id_siswa',$idSiswa)->where('id_mata_pelajaran',$idMataPelajaran)->where('status_kehadiran','2')->count();

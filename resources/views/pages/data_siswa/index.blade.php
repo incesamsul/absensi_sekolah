@@ -8,7 +8,7 @@
                 <div class="card-header d-flex  justify-content-between">
                     <h4>Data Siswa</h4>
                     <div class="table-tools d-flex justify-content-around ">
-                        <input type="text" class="form-control card-form-header mr-3" placeholder="Cari Data Pengguna ..." id="searchbox">
+                        <input required type="text" class="form-control card-form-header mr-3" placeholder="Cari Data Pengguna ..." id="searchbox">
                         <button type="button" class="btn btn-primary float-right" data-toggle="modal" id="btn-tambah" data-target="#modalPengguna"><i class="fas fa-plus"></i></button>
                     </div>
                 </div>
@@ -38,7 +38,7 @@
                                     {{-- <td>{{ $row->tempat_lahir.'/'.$row->tanggal_lahir }}</td> --}}
                                     <td>{{ $row->jenis_kelamin = 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                                     {{-- <td>{{ $row->alamat }}</td> --}}
-                                    <td>{{ $row->tahun_angkatan }}</td>
+                                    <td>{{ $row->semester->semester }}</td>
                                     <td>
                                         <button data-toggle="modal" data-target="#modalPreview" data-foto="{{ asset('data/foto_siswa/'.$row->foto) }}" class="btn btn-lihat btn-primary"><i class="fas fa-eye"></i> Lihat</button>
                                     </td>
@@ -58,9 +58,9 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
-                    <input type="hidden" name="hidden_column_name" id="hidden_column_name" value="id" />
-                    <input type="hidden" name="hidden_sort_type" id="hidden_sort_type" value="asc" />
+                    <input required type="hidden" name="hidden_page" id="hidden_page" value="1" />
+                    <input required type="hidden" name="hidden_column_name" id="hidden_column_name" value="id" />
+                    <input required type="hidden" name="hidden_sort_type" id="hidden_sort_type" value="asc" />
                 </div>
             </div>
         </div>
@@ -101,8 +101,8 @@
                     @csrf
                     <div class="form-group">
                         <label for="id_kelas">Kelas</label>
-                        <input type="hidden" id="id" name="id">
-                        <select name="id_kelas" id="id_kelas" class="form-control">
+                        <input required type="hidden" id="id" name="id">
+                        <select required name="id_kelas" id="id_kelas" class="form-control">
                             @foreach ($kelas as $row)
                                 <option value="{{ $row->id_kelas }}">{{ $row->nama_kelas }}</option>
                             @endforeach
@@ -110,42 +110,42 @@
                     </div>
                     <div class="form-group">
                         <label for="nis">nis</label>
-                        <input type="text" class="form-control" name="nis" id="nis">
+                        <input required type="text" class="form-control" name="nis" id="nis">
                     </div>
                     <div class="form-group">
                         <label for="nama_siswa">nama_siswa</label>
-                        <input type="text" class="form-control" name="nama_siswa" id="nama_siswa">
+                        <input required type="text" class="form-control" name="nama_siswa" id="nama_siswa">
                     </div>
                     <div class="form-group">
                         <label for="tempat_lahir">tempat_lahir</label>
-                        <input type="text" class="form-control" name="tempat_lahir" id="tempat_lahir">
+                        <input required type="text" class="form-control" name="tempat_lahir" id="tempat_lahir">
                     </div>
                     <div class="form-group">
                         <label for="tanggal_lahir">tanggal_lahir</label>
-                        <input type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir">
+                        <input required type="date" class="form-control" name="tanggal_lahir" id="tanggal_lahir">
                     </div>
                     <div class="form-group">
                         <label for="jenis_kelamin">jenis_kelamin</label>
-                        <select name="jenis_kelamin" id="jenis_kelamin" class="form-control">
+                        <select required name="jenis_kelamin" id="jenis_kelamin" class="form-control">
                             <option value="L">Laki-laki</option>
                             <option value="P">Perempuan</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="alamat">alamat</label>
-                        <input type="text" class="form-control" name="alamat" id="alamat">
+                        <input required type="text" class="form-control" name="alamat" id="alamat">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="tahun_angkatan">tahun_angkatan</label>
-                        <input type="text" class="form-control" name="tahun_angkatan" id="tahun_angkatan">
-                    </div>
+                        <input required type="text" class="form-control" name="tahun_angkatan" id="tahun_angkatan">
+                    </div> -->
                     <div class="form-group">
                         <label for="no_wa_ortu">No wa ortu</label>
-                        <input type="text" class="form-control" name="no_wa_ortu" id="no_wa_ortu">
+                        <input required type="text" class="form-control" name="no_wa_ortu" id="no_wa_ortu">
                     </div>
                     <div class="form-group">
                         <label for="foto">foto</label>
-                        <input type="file" class="form-control" name="foto" id="foto">
+                        <input required type="file" class="form-control" name="foto" id="foto">
                     </div>
             </div>
             <div class="modal-footer">

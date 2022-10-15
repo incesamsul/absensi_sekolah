@@ -8,8 +8,8 @@
                 <div class="card-header d-flex  justify-content-between">
                     <h4>Data Pengguna</h4>
                     <div class="table-tools d-flex justify-content-around ">
-                        <input type="text" class="form-control card-form-header  mr-3" placeholder="Cari Data Pengguna ..." id="cari-data-pengguna">
-                        <select class="custom-select form-control mr-3" id="filter-data-pengguna">
+                        <input required type="text" class="form-control card-form-header  mr-3" placeholder="Cari Data Pengguna ..." id="cari-data-pengguna">
+                        <select required class="custom-select form-control mr-3" id="filter-data-pengguna">
                             <option value="" selected>Filter</option>
                             <option value=""></option>
                         </select>
@@ -31,9 +31,9 @@
                             @include('pages.pengguna.users_data')
                         </tbody>
                     </table>
-                    <input type="hidden" name="hidden_page" id="hidden_page" value="1" />
-                    <input type="hidden" name="hidden_column_name" id="hidden_column_name" value="id" />
-                    <input type="hidden" name="hidden_sort_type" id="hidden_sort_type" value="asc" />
+                    <input required type="hidden" name="hidden_page" id="hidden_page" value="1" />
+                    <input required type="hidden" name="hidden_column_name" id="hidden_column_name" value="id" />
+                    <input required type="hidden" name="hidden_sort_type" id="hidden_sort_type" value="asc" />
                 </div>
             </div>
         </div>
@@ -62,12 +62,12 @@
                     @csrf
                     <div class="form-group">
                         <label for="nama">Nama</label>
-                        <input type="hidden" class="form-control" name="id" id="id">
-                        <input type="text" class="form-control" name="nama" id="nama">
+                        <input required type="hidden" class="form-control" name="id" id="id">
+                        <input required type="text" class="form-control" name="nama" id="nama">
                     </div>
                     <div class="form-group">
                         <label for="email">email</label>
-                        <input type="text" class="form-control" name="email" id="email">
+                        <input required type="text" class="form-control" name="email" id="email">
                     </div>
                     <div class="form-group">
                         <label>Role</label>

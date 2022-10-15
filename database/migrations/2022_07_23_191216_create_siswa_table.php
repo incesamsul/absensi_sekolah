@@ -23,10 +23,11 @@ class CreateSiswaTable extends Migration
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('alamat');
             $table->string('foto');
-            $table->string('tahun_angkatan');
+            $table->unsignedInteger('id_semester');
             $table->string('no_wa_ortu');
             $table->timestamps();
             $table->foreign('id_kelas')->references('id_kelas')->on('kelas')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('id_semester')->references('id_semester')->on('semester')->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

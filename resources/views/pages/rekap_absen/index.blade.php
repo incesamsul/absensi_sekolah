@@ -11,11 +11,11 @@
                             <select id="jadwal_mengajar" class="form-control mx-2">
                                 <option value="">--pilih Mata pelajaran --</option>
                                 @foreach ($jadwal_mengajar as $row)
-                                <option value="{{ $row->id_mata_pelajaran }}">{{ $row->mataPelajaran->id_mata_pelajaran }} - {{ $row->mataPelajaran->kode_mata_pelajaran
+                                <option {{ $id_mata_pelajaran == $row->id_mata_pelajaran ? "selected" :'' }} value="{{ $row->id_mata_pelajaran }}">{{ $row->mataPelajaran->id_mata_pelajaran }} - {{ $row->mataPelajaran->kode_mata_pelajaran
                                     }} - {{ $row->mataPelajaran->nama_mata_pelajaran }} - {{ $row->kelas->nama_kelas }}</option>
                                 @endforeach
                             </select>
-                            <a href="{{ URL::to('/wali_kelas/cetak_absen') }}" type="button" class="btn btn-primary float-right" ><i class="fas fa-print"></i></a>
+                            <a href="" type="button" class="btn btn-primary btn-cetak float-right" ><i class="fas fa-print"></i></a>
                         </div>
                 </div>
                 <div class="card-body">
@@ -42,6 +42,12 @@
             let id_jadwal = $(this).val();
             document.location.href = '/wali_kelas/rekap_absen/' + id_jadwal;
         });
+        
+        $('.btn-cetak').on('click', function(e){
+            e.preventDefault();
+            let id_jadwal = $('#jadwal_mengajar').val();
+            document.location.href = '/wali_kelas/cetak_absen/' + id_jadwal;
+        })
 
 
 

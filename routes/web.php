@@ -52,7 +52,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator,guru,guru_bk,wali
     Route::get('/bantuan', [General::class, 'bantuan']);
 
     Route::post('/ubah_foto_profile', [General::class, 'ubahFotoProfile']);
-    Route::post('/ubah_role', [General::class, 'ubahRole']);
+    Route::get('/update_role/{role}', [General::class, 'ubahRole']);
 });
 
 // GURU ROUTE
@@ -84,6 +84,7 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru_bk']], function () {
     Route::group(['prefix' => 'guru_bk'], function () {
         // GET REQUEST
         Route::get('/kelas/{id_kelas}', [GuruBk::class, 'rekapAbsen']);
+        Route::get('/cetak_absen/{id_kelas}', [GuruBk::class, 'cetakAbsen']);
     });
 });
 
@@ -92,14 +93,16 @@ Route::group(['middleware' => ['auth', 'ceklevel:wakasek_kesiswaan']], function 
     Route::group(['prefix' => 'wakasek_kesiswaan'], function () {
         // GET REQUEST
         Route::get('/kelas/{id_kelas}', [WakasekKesiswaan::class, 'rekapAbsen']);
+        Route::get('/cetak_absen/{id_kelas}', [GuruBk::class, 'cetakAbsen']);
     });
 });
 
 //KEPALA SEKOLAH
-Route::group(['middleware' => ['auth', 'ceklevel:guru_bk']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:kepala_sekolah']], function () {
     Route::group(['prefix' => 'kepala_sekolah'], function () {
         // GET REQUEST
         Route::get('/kelas/{id_kelas}', [KepalaSekolah::class, 'rekapAbsen']);
+        Route::get('/cetak_absen/{id_kelas}', [GuruBk::class, 'cetakAbsen']);
     });
 });
 
@@ -121,12 +124,18 @@ Route::group(['middleware' => ['auth', 'ceklevel:Administrator']], function () {
         Route::get('/data_guru', [Admin::class, 'dataGuru']);
         Route::get('/data_wakasek', [Admin::class, 'dataWakasek']);
         Route::get('/data_kepsek', [Admin::class, 'dataKepsek']);
+        Route::get('/manajemen_role', [Admin::class, 'manajemenRole']);
 
 
         // CRUD KELAS
         Route::post('/create_kelas', [Admin::class, 'createKelas']);
         Route::post('/update_kelas', [Admin::class, 'updateKelas']);
         Route::post('/delete_kelas', [Admin::class, 'deleteKelas']);
+
+        // CRUD KELAS
+        Route::post('/create_user_role', [Admin::class, 'createUserRole']);
+        Route::post('/update_user_role', [Admin::class, 'updateUserRole']);
+        Route::post('/delete_user_role', [Admin::class, 'deleteUserRole']);
 
         // CRUD SEMESTER
         Route::post('/create_semester', [Admin::class, 'createSemester']);
