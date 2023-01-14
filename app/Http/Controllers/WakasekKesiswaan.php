@@ -21,6 +21,7 @@ class WakasekKesiswaan extends Controller
         $data['headerSubTitle'] = 'Selamat Datang, administrator | Aplikasi Absensi Siswa';
         $data['id_kelas'] = $id_kelas;
         // $data['anak_wali'] = Siswa::where('id_kelas', $idKelas->id_kelas)->get();
+        
         $data['siswa'] = Siswa::with(["absensi" => function ($q) {
             $q->where('absensi.status_kehadiran', '=', '1');
         }])->where('id_kelas',$id_kelas)->get();

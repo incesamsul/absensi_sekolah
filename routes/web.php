@@ -69,13 +69,13 @@ Route::group(['middleware' => ['auth', 'ceklevel:guru']], function () {
 });
 
 // WALI KELAS ROUTE
-Route::group(['middleware' => ['auth', 'ceklevel:wali_kelas']], function () {
+Route::group(['middleware' => ['auth', 'ceklevel:wali_kelas,guru_bk,kepala_sekolah,wakasek_kesiswaan']], function () {
     Route::group(['prefix' => 'wali_kelas'], function () {
         // GET REQUEST
         Route::get('/rekap_absen', [WaliKelas::class, 'rekapAbsen']);
-        Route::get('/rekap_absen/{id_mata_pelajaran}', [WaliKelas::class, 'rekapAbsen']);
+        Route::get('/rekap_absen/{id_mata_pelajaran}/{id_semester}/{id_kelas}', [WaliKelas::class, 'rekapAbsen']);
         Route::get('/cetak_absen', [WaliKelas::class, 'cetakAbsen']);
-        Route::get('/cetak_absen/{id_mata_pelajaran}', [WaliKelas::class, 'cetakAbsen']);
+        Route::get('/cetak_absen/{id_mata_pelajaran}/{id_semester}/{id_kelas}', [WaliKelas::class, 'cetakAbsen']);
     });
 });
 

@@ -96,11 +96,11 @@
 											<span class="sub-item">Mata Pelajaran</span>
 										</a>
 									</li>
-									<li id="liWaliKelas">
+									<!-- <li id="liWaliKelas">
 										<a href="{{ URL::to('/admin/wali_kelas') }}">
 											<span class="sub-item">Wali kelas</span>
 										</a>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</li>
@@ -123,19 +123,25 @@
 							</a>
 						</li>
 
-						<li class="nav-item" id="liDataWakasek">
+						<!-- <li class="nav-item" id="liDataWakasek">
 							<a href="{{ URL::to('/admin/data_wakasek') }}" class="collapsed" >
 							<i class="fas fa-chalkboard-teacher"></i>
 								<p>Data Wakasek Kesiswaan</p>
 							</a>
-						</li>
+						</li> -->
 
-						<li class="nav-item" id="liDataKepsek">
+						<li class="nav-item" id="liWaliKelas">
+							<a href="{{ URL::to('/admin/wali_kelas') }}" class="collapsed" >
+							<i class="fas fa-chalkboard-teacher"></i>
+								<p>Wali Kelas</p>
+							</a>
+						</li>
+						<!-- <li class="nav-item" id="liDataKepsek">
 							<a href="{{ URL::to('/admin/data_kepsek') }}" class="collapsed" >
 							<i class="fas fa-chalkboard-teacher"></i>
 								<p>Data Kepala Sekolah</p>
 							</a>
-						</li>
+						</li> -->
 						<li class="nav-item" id="liManajemenRole">
 							<a href="{{ URL::to('/admin/manajemen_role') }}" class="collapsed" >
 							<i class="fas fa-users"></i>
@@ -172,7 +178,7 @@
 
 						{{-- MENU WAKASEK KESISWAAN--}}
                         @if (auth()->user()->role == 'wakasek_kesiswaan')
-						<li class="nav-item" id="liPresentasiKehadiran">
+						<!-- <li class="nav-item" id="liPresentasiKehadiran">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-layer-group"></i>
 								<p>Presentase Kehadiran</p>
@@ -189,12 +195,18 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </li>
+                        </li> -->
+						<li class="nav-item" id="liRekapAbsen">
+							<a href="{{ URL::to('/wali_kelas/rekap_absen') }}" class="collapsed" >
+								<i class="fas fa-list"></i>
+								<p>Rekap absen</p>
+							</a>
+						</li>
                         @endif
 
 						{{-- MENU KEPALA SEKOLAH--}}
                         @if (auth()->user()->role == 'kepala_sekolah')
-						<li class="nav-item" id="liPresentasiKehadiran">
+						<!-- <li class="nav-item" id="liPresentasiKehadiran">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-layer-group"></i>
 								<p>Presentase Kehadiran</p>
@@ -211,13 +223,19 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </li>
+                        </li> -->
+						<li class="nav-item" id="liRekapAbsen">
+							<a href="{{ URL::to('/wali_kelas/rekap_absen') }}" class="collapsed" >
+								<i class="fas fa-list"></i>
+								<p>Rekap absen</p>
+							</a>
+						</li>
 	 					@endif
 
 						{{-- MENU GURU BK--}}
                         @if (auth()->user()->role == 'guru_bk')
 
-						<li class="nav-item" id="liPresentasiKehadiran">
+						<!-- <li class="nav-item" id="liPresentasiKehadiran">
 							<a data-toggle="collapse" href="#base">
 								<i class="fas fa-layer-group"></i>
 								<p>Presentase Kehadiran</p>
@@ -234,7 +252,13 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        </li>
+                        </li> -->
+						<li class="nav-item" id="liRekapAbsen">
+							<a href="{{ URL::to('/wali_kelas/rekap_absen') }}" class="collapsed" >
+								<i class="fas fa-list"></i>
+								<p>Rekap absen</p>
+							</a>
+						</li>
                         @endif
 
 						<li class="mx-4 mt-2">

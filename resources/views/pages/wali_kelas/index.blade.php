@@ -162,8 +162,8 @@
 
     });
 
-    $('#liDataUmum').addClass('active submenu');
-    $('#liDataUmum #base').addClass('show');
+    // $('#liDataUmum').addClass('active submenu');
+    // $('#liDataUmum #base').addClass('show');
     $('#liWaliKelas').addClass('active');
 
 </script>
